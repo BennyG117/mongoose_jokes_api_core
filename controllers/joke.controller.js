@@ -1,6 +1,5 @@
 //controller is our logic*
 
-//!SOMETHING WRONG HERE?
 const Jokes = require("../models/joke.model");
 
 module.exports = {
@@ -8,7 +7,6 @@ module.exports = {
     res.json({ message: "Hello World" });
   },
 
-  //!ERROR HERE ("funny" acting as a placeholder)*
   //returns a list of all jokes
   getAllJokes: (req, res) => {
     Jokes
@@ -22,7 +20,6 @@ module.exports = {
       });
   },
 
-  //!ERROR HERE
   //returns one joke with a matching :id
   getOneJoke: (req, res) => {
     Jokes
@@ -37,13 +34,13 @@ module.exports = {
       });
   },
 
-  //!ERROR HERE
-  //Adds a new joke to the DB
+  // Adds a new joke to the DB
   postAddJoke: (req, res) => {
+    // console.log(req.body);
     Jokes
       .create(req.body)
-      .then((postAddJoke) => {
-        res.json(postAddJoke);
+      .then((funny) => {
+        res.json(funny);
       })
       .catch((err) => {
         console.log("postAddJoke Error", err);
@@ -52,24 +49,27 @@ module.exports = {
       });
   },
 
-  //!ERROR HERE
+
   //Partially updates an existing joke with a matching id
   patchUpdateJoke: (req, res) => {
+    // console.log(req.body);
     Jokes
       .findOneAndUpdate({ _id: req.params.id }, req.body, {
         new: true,
-        runValidators: true,
+        runValidators: true
       })
-      .then((funny) => {
-        res.json(funny);
+      .then((updatedFunny) => {
+        res.json({updatedFunny});
       })
       .catch((err) => {
-        // console.log("patchUpdateJoke Error", err);
-        res?.json(err?.errors?.message || err);
+        console.log("patchUpdateJoke Error", err);
+        //DO NOT USE - console.res.json(err);
+        res.json(err);
+        // // console.log("patchUpdateJoke Error", err);
+        // res?.json(err?.errors?.message || err);
       });
   },
 
-  //TODO: similar to get one, just using delete, then confirm how to match with specific id
   //Deletes a joke with a matching id
   deleteOneJoke: (req, res) => {
     Jokes

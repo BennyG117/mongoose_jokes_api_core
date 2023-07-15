@@ -2,7 +2,10 @@ const express = require('express')
 const app = express()
 const port = 8080 
 
-//Added for integrating mongoose
+
+
+require('dotenv').config()
+
 require('./config/mongoose.config')
 
 app.use(express.json() );

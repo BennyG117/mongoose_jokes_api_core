@@ -5,14 +5,17 @@ const password = process.env.ATLAS_PASSWORD;
 const cluster = process.env.ATLAS_CLUSTER;
 const db = process.env.ATLAS_DB;
 
+
 // const connection = `mongodb+srv://bengomezp117:<password>@cluster0.k53yzw9.mongodb.net/?retryWrites=true&w=majority`
 const connectionString = `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${db}?retryWrites=true&w=majority`;
+
 
 //!checking issues connecting
 // console.log(connectionString);
 
 mongoose
-  .connect(connectionString, {
+    .connect(connectionString, {
+  // .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
